@@ -51,7 +51,27 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Firebase Auth")),
+      appBar: AppBar(
+        elevation: 4, // subtle shadow for depth
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20), // rounded bottom corners
+          ),
+        ),
+        title: const Text(
+          "Firebase Auth",
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 0.5,
+          ),
+        ),
+        foregroundColor:
+            Colors.black87, // ensures default back button is visible
+      ),
 
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -62,9 +82,20 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             TextField(
               controller: email,
-              decoration: const InputDecoration(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
                 labelText: "Email",
-                border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.grey[100],
+                prefixIcon: const Icon(Icons.email_outlined),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 18,
+                ),
               ),
             ),
 
@@ -73,17 +104,59 @@ class _LoginPageState extends State<LoginPage> {
             TextField(
               controller: pass,
               obscureText: true,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: "Password",
-                border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.grey[100],
+                prefixIcon: const Icon(Icons.lock_outline),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 18,
+                ),
               ),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 25),
 
-            ElevatedButton(onPressed: login, child: const Text("Login")),
-
-            TextButton(onPressed: signup, child: const Text("Create Account")),
+            // Login Button
+            ElevatedButton(
+              onPressed: login,
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                backgroundColor: Colors.redAccent,
+                elevation: 6,
+              ),
+              child: const Text(
+                "Login",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 12),
+            // Create Account Button
+            TextButton(
+              onPressed: signup,
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              child: const Text(
+                "Create Account",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.redAccent,
+                ),
+              ),
+            ),
           ],
         ),
       ),
